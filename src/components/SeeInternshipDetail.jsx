@@ -25,17 +25,9 @@ export default function InternshipDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const data = useSelector((state) => state.internships.data);
-  const { user } = useSelector((state) => state.user);
-  // const apply = user.appliedinternships;
-  console.log(user);
-
-  const handleApply = () => {
-    dispatch(applyinternship(id));
-    toast("Applied");
-  };
-  useEffect(() => {
-    dispatch(asynccurrentUser()); // Fetch loggedinuser data for student when component mounts
-  }, [dispatch]);
+  // const { user } = useSelector((state) => state.user);
+  // // const apply = user.appliedinternships;
+  // //(user);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -86,7 +78,10 @@ export default function InternshipDetail() {
         <h1 className="font-semibold">{data.profile} Intern</h1>
         <div className="interparent2">
           <button className="font-semibold text-xl">
-            <img src="../../public/images/stock.png" alt="" />
+            <img
+              src="https://ik.imagekit.io/sunnykurmi/stock.png?updatedAt=1708749737137"
+              alt=""
+            />
             Actively hiring
           </button>
           <div className="w-full h-24 flex ">
@@ -240,7 +235,10 @@ export default function InternshipDetail() {
           </div>
         </div>
         <div className="mt-24">
-          <img src="../../public/images/footer.png" alt="" />
+          <img
+            src="https://ik.imagekit.io/sunnykurmi/footer.png?updatedAt=1708749737577"
+            alt=""
+          />
         </div>
       </div>
       <ToastContainer />

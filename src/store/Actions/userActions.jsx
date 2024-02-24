@@ -12,7 +12,7 @@ export const asynccurrentUser = () => async (dispatch, getState) => {
     const { data } = await axios.post("/student");
     dispatch(saveUser(data.loggedinuser));
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 
@@ -39,7 +39,7 @@ export const applyjob = (jobId) => async (dispatch) => {
     await axios.post(`/student/apply/job/${jobId}`);
     dispatch(asynccurrentUser());
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 export const applyinternship = (internshipId) => async (dispatch) => {
@@ -47,7 +47,7 @@ export const applyinternship = (internshipId) => async (dispatch) => {
     await axios.post(`/student/apply/internship/${internshipId}`);
     dispatch(asynccurrentUser());
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 export const update = (formData, id) => async (dispatch) => {
@@ -55,7 +55,7 @@ export const update = (formData, id) => async (dispatch) => {
     await axios.post(`/student/studentupdate/${id}`, formData); // Pass formData to the backend
     dispatch(asynccurrentUser());
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 export const ChangePassword = (formData, id) => async (dispatch) => {
@@ -63,14 +63,14 @@ export const ChangePassword = (formData, id) => async (dispatch) => {
     await axios.post(`/student/reset-password/${id}`, formData); // Pass formData to the backend
     dispatch(asynccurrentUser());
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 export const ChangePassword2 = (formData, id) => async () => {
   try {
     await axios.post(`/student/reset-password/${id}`, formData); // Pass formData to the backend
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 export const Delete = (userId) => async (dispatch) => {
@@ -78,7 +78,7 @@ export const Delete = (userId) => async (dispatch) => {
     await axios.post(`/student/delete-account/${userId}`);
     dispatch(asynccurrentUser());
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 export const SendMail = (formdata) => async (dispatch) => {
@@ -86,16 +86,16 @@ export const SendMail = (formdata) => async (dispatch) => {
     const response = await axios.post("/student/send-mail/", formdata);
     dispatch(sendmail(response.data));
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 
 export const Avatar = (formData, id) => async (dispatch) => {
   try {
-    console.log(formData, id);
+    //(formData, id);
     await axios.post(`/student/avatar/${id}`, formData);
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 
@@ -104,6 +104,6 @@ export const asyncremoveUser = () => async (dispatch, getState) => {
     await axios.get("/student/signout");
     dispatch(removeUser());
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };

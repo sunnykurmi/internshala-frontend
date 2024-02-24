@@ -35,7 +35,9 @@ export default function Home() {
     <>
       <div className="homenav">
         <div className="homenavleft">
-          <img src="../../public/images/logo.webp" alt="" />
+          <img 
+            src="https://ik.imagekit.io/sunnykurmi/logo.webp?updatedAt=1708749688574"
+            alt="" />
           <h2
             className="cursor-pointer"
             onClick={() => scrollToRef(internshipsRef)}
@@ -150,7 +152,7 @@ export default function Home() {
           alt=""
         />
       </div>
-      <img className="home2" src="../../public/images/home2.jpg" alt="" />
+      <img className="home2" src="https://ik.imagekit.io/sunnykurmi/home2.jpg?updatedAt=1708749738027" alt="" />
       {showLogin && <Login onClose={handleLoginClose} />}
     </>
   );

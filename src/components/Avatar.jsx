@@ -30,7 +30,7 @@ export default function Editavatar(props) {
       dispatch(Resume());
       props.onClose();
     } catch (error) {
-      console.log(error.response.data);
+      //(error.response.data);
     } finally {
       setLoading(false); // Set loading state back to false when update process is completed
     }

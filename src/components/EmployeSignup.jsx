@@ -49,7 +49,9 @@ export default function EmployeSignup() {
   return (
     <>
       <div className="logo">
-        <img src="../public/images/logo.webp" alt="" />
+        <img 
+            src="https://ik.imagekit.io/sunnykurmi/logo.webp?updatedAt=1708749688574"
+            alt="" />
         <button
           className="text-2xl font-semibold"
           onClick={() => setShowLogin(true)}

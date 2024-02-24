@@ -63,7 +63,7 @@ function Review() {
         <div className="w-[70%] h-full">
           <img
             className="w-[15%]   max-[600px]:w-[80%] ml-[20vh] max-[600px]:ml-[0vh] mt-2 "
-            src="../../public/images/logo.webp"
+            src="https://ik.imagekit.io/sunnykurmi/logo.webp?updatedAt=1708749688574"
             alt=""
           />
         </div>

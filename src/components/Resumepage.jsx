@@ -6,7 +6,7 @@
 // export default function Resumepage() {
 //   const dispatch = useDispatch(); // Get dispatch function
 //   const resume = useSelector((state) => state.resume.data); // Assuming resume details are stored under 'user' in Redux store
-//   console.log(resume);
+//   //(resume);
 //   useEffect(() => {
 //     dispatch(Resume()); // Fetch resume data for student when component mounts
 //   }, [dispatch]);

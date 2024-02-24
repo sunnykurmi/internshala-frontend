@@ -37,7 +37,7 @@ const Home = () => {
   };
   const dispatch = useDispatch(); // Get dispatch function
   const loggedinuser = useSelector((state) => state.user); // Assuming loggedinuser details are stored under 'user' in Redux store
-  console.log(loggedinuser.user);
+  //(loggedinuser.user);
   useEffect(() => {
     dispatch(asynccurrentUser()); // Fetch loggedinuser data for student when component mounts
   }, [dispatch]);
@@ -71,7 +71,7 @@ const Home = () => {
         <div className="w-[70%]  h-full">
           <img
             className="w-[15%] ml-[20vh] max-[600px]:ml-[0vh] max-[600px]:mt-[-1.5vh]  max-[600px]:w-[100%] "
-            src="../../public/images/logo.webp"
+            src="https://ik.imagekit.io/sunnykurmi/logo.webp?updatedAt=1708749688574"
             alt=""
           />
         </div>
@@ -172,7 +172,11 @@ const Home = () => {
       <div ref={jobsRef}>
         <Jobs />
       </div>
-      <img className="home" src="../../public/images/home.jpg" alt="" />
+      <img
+        className="home"
+        src="https://ik.imagekit.io/sunnykurmi/home.jpg?updatedAt=1708749737993"
+        alt=""
+      />
       <div className=" overflow-hidden">
         <div className="marquee">
           <img
@@ -193,7 +197,11 @@ const Home = () => {
           />
         </div>
       </div>
-      <img className="home2" src="../../public/images/home2.jpg" alt="" />
+      <img
+        className="home2"
+        src="https://ik.imagekit.io/sunnykurmi/home2.jpg?updatedAt=1708749738027"
+        alt=""
+      />
       {showLogin && <Login onClose={handleLoginClose} />}
     </>
   );

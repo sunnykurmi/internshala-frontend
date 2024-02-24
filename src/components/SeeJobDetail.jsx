@@ -21,7 +21,7 @@ export default function JobDetail() {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const data = useSelector((state) => state.jobs.data);
-  console.log(data);
+  // //(data);
 
   const handleApply = () => {
     dispatch(applyjob(id));
@@ -77,7 +77,10 @@ export default function JobDetail() {
         <h1 className="font-semibold">{data.jobtitle} Job</h1>
         <div className="interparent2">
           <button className="font-semibold text-xl">
-            <img src="../../public/images/stock.png" alt="" />
+            <img
+              src="https://ik.imagekit.io/sunnykurmi/stock.png?updatedAt=1708749737137"
+              alt=""
+            />
             Actively hiring
           </button>
           <div className="w-full h-24 flex ">
@@ -223,7 +226,10 @@ export default function JobDetail() {
           </div>
         </div>
         <div className="mt-24">
-          <img src="../../public/images/footer.png" alt="" />
+          <img
+            src="https://ik.imagekit.io/sunnykurmi/footer.png?updatedAt=1708749737577"
+            alt=""
+          />
         </div>
       </div>
       <ToastContainer />

@@ -53,7 +53,7 @@ function EmployeEdit() {
 
       // Optionally, you can fetch the updated data again after successful update
     } catch (error) {
-      console.log(error.response.data);
+      //(error.response.data);
     }
   };
 
@@ -110,6 +110,7 @@ function EmployeEdit() {
         <div className="  flex overflow-hidden flex-shrink-0 ml-16 justify-center items-center font-semibold text-[#272727e4]">
           <img
             className="h-16 w-16 flex-shrink-0 object-cover rounded-full"
+            onClick={opendropdown}
             src={user.organizationlogo.url}
             alt=""
           />
@@ -147,6 +148,11 @@ function EmployeEdit() {
                   onChange={handleChange}
                   placeholder="John"
                 />{" "}
+                {formData.firstname && formData.firstname.length < 3 && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter at least 3 characters
+                  </p>
+                )}
               </div>
               <div className="w-[50%]  ">
                 <h1 className=" text-2xl font-bold mb-2 text-[#272727c1]">
@@ -161,6 +167,11 @@ function EmployeEdit() {
                   id=""
                   placeholder="Deyy"
                 />{" "}
+                {formData.lastname && formData.lastname.length < 3 && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter at least 3 characters
+                  </p>
+                )}
               </div>
             </div>
             <div className="w-full">
@@ -176,6 +187,11 @@ function EmployeEdit() {
                 value={formData.email}
                 onChange={handleChange}
               />
+              {formData.email && !/^\S+@\S+\.\S+$/.test(formData.email) && (
+                <p className="text-xl mt-1 text-red-500">
+                  Please enter a valid email address
+                </p>
+              )}
             </div>
             <div className="flex w-full gap-[5vh]">
               <div className="w-[50%]">
@@ -190,7 +206,20 @@ function EmployeEdit() {
                   value={formData.contact}
                   onChange={handleChange}
                   placeholder="Add contact details"
+                  onKeyPress={(e) => {
+                    // Allow only numbers
+                    const pattern = /[0-9]/;
+                    const isValidInput = pattern.test(e.key);
+                    if (!isValidInput) {
+                      e.preventDefault();
+                    }
+                  }}
                 />
+                {formData.contact && !/^\d{10}$/.test(formData.contact) && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter a valid 10-digit contact number
+                  </p>
+                )}
               </div>
               <div className="w-[50%]">
                 <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
@@ -205,6 +234,11 @@ function EmployeEdit() {
                   onChange={handleChange}
                   placeholder="add city details"
                 />
+                {formData.city && formData.city.length < 3 && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter at least 3 characters
+                  </p>
+                )}
               </div>
             </div>
             <div className="w-[100%]">
@@ -220,10 +254,41 @@ function EmployeEdit() {
                 onChange={handleChange}
                 placeholder="jon company"
               />
+              {formData.organizationname &&
+                formData.organizationname.length < 3 && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter at least 3 characters
+                  </p>
+                )}
             </div>
             <button
               type="submit"
-              className="px-[4vh] mt-[5vh] py-[2vh] ml-[40vh] max-[600px]:ml-[15vh] text-2xl font-semibold rounded-2xl text-white bg-[#008BDC] "
+              disabled={
+                !formData.contact ||
+                formData.contact.length !== 10 || // Disable if contact number length is not 10
+                !formData.firstname ||
+                formData.firstname.length < 3 || // Disable if first name length is less than 3
+                !formData.lastname ||
+                formData.lastname.length < 3 || // Disable if last name length is less than 3
+                !formData.city ||
+                formData.city.length < 3 || // Disable if city length is less than 3
+                // Disable if organization name length is less than 3
+                !formData.email || // Disable if email is empty
+                !/^\S+@\S+\.\S+$/.test(formData.email) // Disable if email is not valid
+              }
+              className={`px-[4vh] mt-[5vh] py-[2vh] ml-[40vh] max-[600px]:ml-[15vh] text-2xl font-semibold rounded-2xl text-white bg-[#008BDC] ${
+                (!formData.contact ||
+                  formData.contact.length !== 10 ||
+                  !formData.firstname ||
+                  formData.firstname.length < 3 ||
+                  !formData.lastname ||
+                  formData.lastname.length < 3 ||
+                  !formData.city ||
+                  formData.city.length < 3 ||
+                  !formData.email ||
+                  !/^\S+@\S+\.\S+$/.test(formData.email)) &&
+                "cursor-not-allowed" // Add cursor-not-allowed class if button is disabled
+              }`}
             >
               Update
             </button>

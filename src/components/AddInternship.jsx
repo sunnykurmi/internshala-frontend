@@ -11,7 +11,7 @@ import {
 export default function addinternship(props) {
   const dispatch = useDispatch();
   const addeducation = useSelector((state) => state.resume.data);
-  // console.log(addeducation.resume.education);
+  // //(addeducation.resume.education);
   const [formData, setFormData] = useState("");
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function addinternship(props) {
       props.onClose();
       dispatch(Resume());
     } catch (error) {
-      console.log(error.response.data);
+      //(error.response.data);
     }
   };
 

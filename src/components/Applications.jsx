@@ -43,7 +43,7 @@ export default function Applications() {
 
   const dispatch = useDispatch(); // Get dispatch function
   const loggedinuser = useSelector((state) => state.user); // Assuming loggedinuser details are stored under 'user' in Redux store
-  console.log(loggedinuser.user);
+  //(loggedinuser.user);
   useEffect(() => {
     dispatch(asynccurrentUser()); // Fetch loggedinuser data for student when component mounts
   }, [dispatch]);
@@ -61,7 +61,7 @@ export default function Applications() {
       </div>
     );
   }
-  // console.log(loggedinuser.user.appliedinternships);
+  // //(loggedinuser.user.appliedinternships);
   const appliedinternships = loggedinuser.user.appliedinternships;
   const appliedjobs = loggedinuser.user.appliedjobs;
   // Function to shuffle an array using Fisher-Yates shuffle algorithm

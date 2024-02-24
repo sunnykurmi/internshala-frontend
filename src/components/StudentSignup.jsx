@@ -11,7 +11,7 @@ export default function Signup() {
   const dispatch = useDispatch();
   const [formValid, setFormValid] = useState(false);
   const [showLogin, setShowLogin] = useState(false); // State to control the visibility of the login component
-  console.log(error);
+  //(error);
   const handleLoginClose = () => {
     setShowLogin(false);
   };
@@ -46,7 +46,10 @@ export default function Signup() {
   return (
     <>
       <div className="logo">
-        <img src="../public/images/logo.webp" alt="" />
+        <img
+          src="https://ik.imagekit.io/sunnykurmi/logo.webp?updatedAt=1708749688574"
+          alt=""
+        />
       </div>
       <div className="container">
         <div className="signupbox">
@@ -99,12 +102,11 @@ export default function Signup() {
                     User already exists with this email
                   </p>
                 )}
-              {error &&
-                error.includes("Please fill a valid email address") && (
-                  <p className="font-medium text-xl text-red-400">
-                    Please fill a valid email address
-                  </p>
-                )}
+              {error && error.includes("Please fill a valid email address") && (
+                <p className="font-medium text-xl text-red-400">
+                  Please fill a valid email address
+                </p>
+              )}
               <h4>Password</h4>
               <input
                 type="password"
@@ -115,7 +117,9 @@ export default function Signup() {
                 placeholder="Must be at least 6 characters"
               />
               {error &&
-                error.includes("password should not exceed more than 15 characters") && (
+                error.includes(
+                  "password should not exceed more than 15 characters"
+                ) && (
                   <p className="font-medium text-xl text-red-400">
                     password should not exceed more than 15 characters
                   </p>

@@ -48,13 +48,15 @@ export default function Forgot() {
     try {
       dispatch(SendMail(formdata));
     } catch (error) {
-      console.log(error.response.data);
+      //(error.response.data);
     }
   };
 
   useEffect(() => {
     if (token === "1" && !toastDisplayed) {
-      toast("Email Sent Successfully");
+      toast.success("Email Sent Successfully", {
+        position: "top-center",
+      });
       setToastDisplayed(true); // Set toastDisplayed to true to prevent displaying the toast again
     }
   }, [token, toastDisplayed]);
@@ -65,7 +67,7 @@ export default function Forgot() {
       dispatch(ChangePassword2(formData, id));
       navigate("/");
     } catch (error) {
-      console.log(error.response.data);
+      //(error.response.data);
     }
   };
 
@@ -73,7 +75,10 @@ export default function Forgot() {
     <>
       <div className="homenav">
         <div className="homenavleft">
-          <img src="../../public/images/logo.webp" alt="" />
+          <img
+            src="https://ik.imagekit.io/sunnykurmi/logo.webp?updatedAt=1708749688574"
+            alt=""
+          />
         </div>
         <div className="homenavright ml-[40vh] ">
           <button className="font-bold text-xl">

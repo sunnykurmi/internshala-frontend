@@ -25,7 +25,7 @@ function Login({ onClose }) {
     setStudentFormData({ ...studentFormData, [e.target.name]: e.target.value });
   };
 
-  console.log(studentFormData);
+  //(studentFormData);
   const signinStudent = async (event) => {
     event.preventDefault();
     dispatch(asyncsignin(studentFormData));

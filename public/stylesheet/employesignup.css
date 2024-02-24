@@ -38,7 +38,7 @@ body {
   height: 90vh;
   margin-top: 0.2vh;
   overflow: hidden;
-  background-image: url(../images/back.png);
+  background-image: url(https://ik.imagekit.io/sunnykurmi/back.png?updatedAt=1708749738260);
   background-size: cover;
   background-position: center;
   display: flex;
@@ -103,7 +103,7 @@ body {
 }
 
 .faltuimage {
-  background-image: url(../images/bakc2.jpg);
+  background-image: url(https://ik.imagekit.io/sunnykurmi/bakc2.jpg?updatedAt=1708749738321);
   background-position: center;
   background-size: cover;
   height: 500vh;
@@ -231,7 +231,7 @@ body {
   }
 
   .faltuimage {
-    background-image: url(../images/bakc2.jpg);
+    background-image: url(https://ik.imagekit.io/sunnykurmi/bakc2.jpg?updatedAt=1708749738321);
     background-position: center;
     background-size: cover;
     height: 140vh;

@@ -5,11 +5,13 @@ import { CreateJob } from "../store/Actions/jobsAction";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { RiArrowLeftLine } from "@remixicon/react";
+import Dropdown from "./EmployeDropdown";
 
 function createJob() {
   const dispatch = useDispatch(); // Get dispatch function
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.employe);
+  const [ShowDropdown, setShowDropdown] = useState(false);
   const [formData, setFormData] = useState({
     jobtitle: "",
     prefrences: "",
@@ -48,8 +50,14 @@ function createJob() {
       dispatch(asynccurrentemploye());
       navigate("/employe");
     } catch (error) {
-      console.log(error.response.data);
+      //(error.response.data);
     }
+  };
+  const opendropdown = () => {
+    setShowDropdown(true); // Show Editresume component when edit is clicked
+  };
+  const closedropdown = () => {
+    setShowDropdown(false); // Hide Editresume component when close is clicked
   };
 
   useEffect(() => {
@@ -72,11 +80,13 @@ function createJob() {
 
   return (
     <>
+      {ShowDropdown && <Dropdown onClose={closedropdown} />}
+
       <div className=" flex  w-full h-32 border-b-2 overflow-hidden ">
         <div className="w-[70%] h-full">
           <img
             className="w-[15%]   max-[600px]:w-[80%] ml-[20vh] max-[600px]:ml-[0vh] mt-2 "
-            src="../../public/images/logo.webp"
+            src="https://ik.imagekit.io/sunnykurmi/logo.webp?updatedAt=1708749688574"
             alt=""
           />
         </div>
@@ -98,6 +108,7 @@ function createJob() {
         <div className="  flex overflow-hidden flex-shrink-0 ml-16 justify-center items-center font-semibold text-[#272727e4]">
           <img
             className="h-16 w-16 flex-shrink-0 object-cover rounded-full"
+            onClick={opendropdown}
             src={user.organizationlogo.url}
             alt=""
           />
@@ -125,6 +136,11 @@ function createJob() {
                 placeholder="eg.Web developer"
                 id=""
               />
+              {formData.jobtitle && formData.jobtitle.length < 3 && (
+                <p className="text-xl mt-1 text-red-500">
+                  Please enter at least 3 characters
+                </p>
+              )}
             </div>
             <div className="w-full">
               <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
@@ -138,6 +154,11 @@ function createJob() {
                 placeholder="eg. music ,dancing"
                 id=""
               />
+              {formData.prefrences && formData.prefrences.length < 3 && (
+                <p className="text-xl mt-1 text-red-500">
+                  Please enter at least 3 characters
+                </p>
+              )}
             </div>
             <div className="w-full">
               <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
@@ -151,6 +172,11 @@ function createJob() {
                 placeholder="eg. paper"
                 id=""
               />
+              {formData.assesments && formData.assesments.length < 3 && (
+                <p className="text-xl mt-1 text-red-500">
+                  Please enter at least 3 characters
+                </p>
+              )}
             </div>
             <div className="w-full">
               <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
@@ -164,6 +190,11 @@ function createJob() {
                 placeholder="eg. Data Analytics , Data Handling"
                 id=""
               />
+              {formData.skills && formData.skills.length < 3 && (
+                <p className="text-xl mt-1 text-red-500">
+                  Please enter at least 3 characters
+                </p>
+              )}
             </div>
             <div className="w-full">
               <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
@@ -177,26 +208,44 @@ function createJob() {
                 placeholder="eg.gym membership"
                 id=""
               />
+              {formData.perks && formData.perks.length < 3 && (
+                <p className="text-xl mt-1 text-red-500">
+                  Please enter at least 3 characters
+                </p>
+              )}
             </div>
             <div className="w-full flex justify-between">
               <div className="w-[48%] ">
                 <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
-                  salary
+                  Salary (LPA)
                 </h1>
                 <div className=" flex gap-10">
                   <input
                     className="w-[100%] px-[2vh]  h-[6vh] text-2xl outline-sky-300   text-black border-[1px] border-[#27272748] p-2 rounded-lg"
                     type="text"
                     onChange={handleChange}
+                    onKeyPress={(e) => {
+                      // Allow only numbers
+                      const pattern = /[0-9]/;
+                      const isValidInput = pattern.test(e.key);
+                      if (!isValidInput) {
+                        e.preventDefault();
+                      }
+                    }}
                     name="salary"
-                    placeholder="eg.60000 LPA"
+                    placeholder="eg. 60000"
                     id=""
                   />
+                  {formData.salary.length === 0 && (
+                    <p className="text-xl mt-1 text-red-500">
+                      Please enter salary details
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="w-[48%]">
                 <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
-                  jobtype
+                  Jobtype
                 </h1>
                 <select
                   className="w-[100%] pl-[2vh]  h-[6vh] text-2xl outline-sky-300   text-black border-[1px] border-[#27272748] p-2 rounded-lg"
@@ -222,7 +271,20 @@ function createJob() {
                   placeholder="eg. 50"
                   onChange={handleChange}
                   id=""
+                  onKeyPress={(e) => {
+                    // Allow only numbers
+                    const pattern = /[0-9]/;
+                    const isValidInput = pattern.test(e.key);
+                    if (!isValidInput) {
+                      e.preventDefault();
+                    }
+                  }}
                 />
+                {formData.openings.length === 0 && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please provide number of openings
+                  </p>
+                )}
               </div>
               <div className="w-[48%]">
                 <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
@@ -236,12 +298,53 @@ function createJob() {
                   placeholder="eg. enter job description"
                   id=""
                 />
+                {formData.description && formData.description.length < 3 && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter at least 3 characters
+                  </p>
+                )}
               </div>
             </div>
 
             <button
               type="submit"
-              className="px-[4vh] mb-10 mt-10 py-[2vh] ml-[35vh] max-[600px]:ml-[10vh] text-2xl font-semibold rounded-2xl text-white bg-[#008BDC] "
+              disabled={
+                !formData.jobtitle ||
+                formData.jobtitle.length < 3 || // Disable if first name length is less than 3
+                !formData.prefrences ||
+                formData.prefrences.length < 3 || // Disable if last name length is less than 3
+                !formData.assesments ||
+                formData.assesments.length < 3 || // Disable if last name length is less than 3
+                !formData.perks ||
+                formData.perks.length < 3 || // Disable if last name length is less than 3
+                !formData.skills ||
+                formData.skills.length < 3 || // Disable if last name length is less than 3
+                !formData.description ||
+                formData.description.length < 3 ||
+                !formData.salary || // Ensure salary is not empty
+                formData.salary.length === 0 ||
+                !formData.openings || // Ensure openings is not empty
+                formData.salary.length === 0 // Disable if last name length is less than 3
+              }
+              className={`px-[4vh] mt-[5vh] mb-10 py-[2vh] ml-[40vh] max-[600px]:ml-[15vh] text-2xl font-semibold rounded-2xl text-white bg-[#008BDC] ${
+                (!formData.jobtitle ||
+                  formData.jobtitle.length < 3 || // Disable if first name length is less than 3
+                  !formData.prefrences ||
+                  formData.prefrences.length < 3 || // Disable if last name length is less than 3
+                  !formData.assesments ||
+                  formData.assesments.length < 3 || // Disable if last name length is less than 3
+                  !formData.perks ||
+                  formData.perks.length < 3 || // Disable if last name length is less than 3
+                  !formData.skills ||
+                  formData.skills.length < 3 || // Disable if last name length is less than 3
+                  !formData.description ||
+                  formData.description.length < 3 ||
+                  !formData.salary || // Ensure salary is not empty
+                  formData.salary.length === 0 ||
+                  !formData.openings || // Ensure openings is not empty
+                  formData.salary.length === 0) &&
+                "cursor-not-allowed" // Add cursor-not-allowed class if button is disabled
+              }`}
             >
               Create Job
             </button>

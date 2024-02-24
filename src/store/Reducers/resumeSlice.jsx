@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const resumeSlice = createSlice({
-  name: "jobs",
+  name: "resume",
   initialState,
   reducers: {
     resumeFound(state, action) {

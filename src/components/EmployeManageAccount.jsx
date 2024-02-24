@@ -28,7 +28,7 @@ import {
 export default function EmployeManageAccount() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.employe);
-  console.log(user);
+  //(user);
   const [formData, setFormData] = useState({});
   const [confirmation, setConfirmation] = useState("");
   const [passwordError, setPasswordError] = useState(true);
@@ -62,7 +62,7 @@ export default function EmployeManageAccount() {
       await dispatch(employeupdate(formData, user._id));
       dispatch(asynccurrentemploye());
     } catch (error) {
-      console.log(error.response.data);
+      //(error.response.data);
     }
   };
 
@@ -75,7 +75,7 @@ export default function EmployeManageAccount() {
         await dispatch(ChangePassword4(formData, user._id));
         dispatch(asynccurrentemploye());
       } catch (error) {
-        console.log(error.response.data);
+        //(error.response.data);
       }
     } else {
       setPasswordError(true);
@@ -91,7 +91,7 @@ export default function EmployeManageAccount() {
         await dispatch(Delete2(user._id));
         dispatch(asynccurrentemploye());
       } catch (error) {
-        console.log(error.response.data);
+        //(error.response.data);
       }
     } else {
       // Handle case where confirmation is not "yes"
@@ -118,7 +118,7 @@ export default function EmployeManageAccount() {
         <div className="w-[70%] h-full">
           <img
             className="w-[15%]  max-[600px]:w-[60%] ml-[20vh] max-[600px]:ml-[1vh] "
-            src="../../public/images/logo.webp"
+            src="https://ik.imagekit.io/sunnykurmi/logo.webp?updatedAt=1708749688574"
             alt=""
           />
         </div>

@@ -32,7 +32,7 @@ import DelEducation from "./DelEducation";
 export default function Resumepage() {
   const dispatch = useDispatch(); // Get dispatch function
   const resume = useSelector((state) => state.resume.data); // Assuming resume details are stored under 'user' in Redux store
-  // console.log(resume);
+  // //(resume);
   const [showEditResume, setShowEditResume] = useState(false);
   const [ShowAvatar, setShowAvatar] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
@@ -57,7 +57,7 @@ export default function Resumepage() {
   const [ShowEditAccomp, setShowEditAccomp] = useState(false);
 
   const [ShowDelEducation, setShowDelEducation] = useState(false);
- 
+
   useEffect(() => {
     dispatch(Resume()); // Fetch resume data for student when component mounts
   }, [dispatch]);
@@ -276,7 +276,7 @@ export default function Resumepage() {
         <div className="w-[70%]  h-full">
           <img
             className="w-[15%] ml-[20vh] max-[600px]:ml-[0vh] max-[600px]:mt-[-1.5vh]  max-[600px]:w-[100%] "
-            src="../../public/images/logo.webp"
+            src="https://ik.imagekit.io/sunnykurmi/logo.webp?updatedAt=1708749688574"
             alt=""
           />
         </div>
@@ -701,7 +701,10 @@ export default function Resumepage() {
         </div>
       </div>
       <div className="">
-        <img src="../../public/images/footer.png" alt="" />
+        <img
+          src="https://ik.imagekit.io/sunnykurmi/footer.png?updatedAt=1708749737577"
+          alt=""
+        />
       </div>
     </>
   );

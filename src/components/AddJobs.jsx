@@ -6,7 +6,7 @@ import { AddJobs, Education, Resume } from "../store/Actions/resumeActions";
 export default function addjobs(props) {
   const dispatch = useDispatch();
   const addeducation = useSelector((state) => state.resume.data);
-  // console.log(addeducation.resume.education);
+  // //(addeducation.resume.education);
   const [formData, setFormData] = useState("");
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function addjobs(props) {
       props.onClose();
       dispatch(Resume());
     } catch (error) {
-      console.log(error.response.data);
+      //(error.response.data);
     }
   };
 

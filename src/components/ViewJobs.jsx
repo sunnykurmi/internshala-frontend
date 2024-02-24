@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import "../../public/stylesheet/internshipdetail.css";
 import { useDispatch, useSelector } from "react-redux";
 import "tailwindcss/tailwind.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { alljobdetails } from "../store/Actions/jobsAction";
 import {
   RiArrowLeftLine,
   RiCalendarLine,
+  RiDeleteBin5Line,
   RiDoorOpenLine,
   RiGroupLine,
   RiMapPinLine,
@@ -15,19 +16,25 @@ import {
 } from "@remixicon/react";
 import { applyjob } from "../store/Actions/userActions";
 import { ToastContainer, toast } from "react-toastify";
+import { deletejob } from "../store/Actions/employeActions";
 
 export default function JobDetail() {
   const { id } = useParams(); // Accessing the ID from URL params
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
   const data = useSelector((state) => state.jobs.data);
-  console.log(data);
+  //(data);
 
   const handleApply = () => {
     dispatch(applyjob(id));
     toast("applied!");
   };
-
+  const handledelete = () => {
+    navigate("/employe");
+    dispatch(deletejob(id));
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -55,29 +62,26 @@ export default function JobDetail() {
 
   return (
     <>
-      {/* <div className="homenav">
-        <div className="homenavleft">
-          <img src="../../public/images/logo.webp" alt="" />
-          <h2>Internships</h2>
-          <h2>Jobs</h2>
-          <h2>Courses</h2>
-        </div>
-        <div className="homenavright">
-          <button className="font-bold text-xl">Search</button>
-          <button className="font-bold text-xl">Login</button>
-          <button className="font-bold text-xl">Candidate Sign-up</button>
-          <button className="font-bold text-xl">Employer Sign-up</button>
-        </div>
-      </div> */}
       <div className="flex text-sky-500 font-semibold gap-5 items-center ml-[10vh] mt-[5vh] text-2xl ">
         <RiArrowLeftLine size={20} />
         <Link to={-1}>Go back</Link>
       </div>
       <div className="interparent">
-        <h1 className="font-semibold">{data.jobtitle} Job</h1>
+        <div className="flex items-center justify-center gap-5 mb-5">
+          <h1 className=" text-5xl font-semibold">{data.jobtitle} Intern</h1>
+          <RiDeleteBin5Line
+            onClick={handledelete}
+            size={15}
+            className="mt-1 cursor-pointer   "
+            color="#1c1c1c9d" // set custom `width` and `height`
+          />
+        </div>
         <div className="interparent2">
           <button className="font-semibold text-xl">
-            <img src="../../public/images/stock.png" alt="" />
+            <img
+              src="https://ik.imagekit.io/sunnykurmi/stock.png?updatedAt=1708749737137"
+              alt=""
+            />
             Actively hiring
           </button>
           <div className="w-full h-24 flex ">
@@ -223,7 +227,10 @@ export default function JobDetail() {
           </div>
         </div>
         <div className="mt-24">
-          <img src="../../public/images/footer.png" alt="" />
+          <img
+            src="https://ik.imagekit.io/sunnykurmi/footer.png?updatedAt=1708749737577"
+            alt=""
+          />
         </div>
       </div>
       <ToastContainer />

@@ -17,7 +17,7 @@ const EmployeHome = () => {
   const { user } = useSelector((state) => state.employe); // Assuming employee details are stored under 'user' in Redux store
   const [ShowDropdown, setShowDropdown] = useState(false);
 
-  console.log(user);
+  //(user);
   useEffect(() => {
     dispatch(asynccurrentemploye()); // Fetch employee data when component mounts
   }, [dispatch]);
@@ -50,7 +50,7 @@ const EmployeHome = () => {
         <div className="w-[70%] h-full">
           <img
             className="w-[15%]   max-[600px]:w-[80%] ml-[20vh] max-[600px]:ml-[0vh] mt-2 "
-            src="../../public/images/logo.webp"
+            src="https://ik.imagekit.io/sunnykurmi/logo.webp?updatedAt=1708749688574"
             alt=""
           />
         </div>
@@ -178,7 +178,7 @@ const EmployeHome = () => {
                   <div className=" w-[20%] text-2xl max-[600px]:text-sm text-[#1f1f1fbd] uppercase  font-medium ">
                     {item.profile || item.jobtitle}
                   </div>
-                  <div className=" w-[20%] text-2xl max-[600px]:text-sm text-[#1f1f1fbd] uppercase  font-medium ">
+                  <div className=" h-9 overflow-hidden w-[20%] text-2xl max-[600px]:text-sm text-[#1f1f1fbd] uppercase  font-medium ">
                     {item.responsibility}
                   </div>
                   <div className=" w-[20%]  text-2xl max-[600px]:text-sm text-[#1f1f1fbd] uppercase  font-medium ">
@@ -275,7 +275,10 @@ const EmployeHome = () => {
           </div>
         </div>
       </div>
-      <img src="../../public/images/footer.png" alt="" />
+      <img
+        src="https://ik.imagekit.io/sunnykurmi/footer.png?updatedAt=1708749737577"
+        alt=""
+      />
     </>
   );
 };

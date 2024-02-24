@@ -22,6 +22,14 @@ export const userSlice = createSlice({
       state.data = action.payload;
       state.error = null;
     },
+    deleteinternship(state, action) {
+      state.data = action.payload;
+      state.error = null;
+    },
+    deletejob(state, action) {
+      state.data = action.payload;
+      state.error = null;
+    },
     employsignuperror: (state, action) => {
       state.error = action.payload; // Set error when signup fails
     },
@@ -38,6 +46,8 @@ export const {
   employsignuperror,
   removeUser,
   sendmail,
+  deleteinternship,
+  deletejob,
 } = userSlice.actions;
 
 export default userSlice.reducer;

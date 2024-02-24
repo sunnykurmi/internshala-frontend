@@ -20,7 +20,7 @@ export default function Employedropdown(props) {
       // Redirect to the homepage after successful logout
       window.location.href = "/"; // This will reload the page
     } catch (error) {
-      console.log("Logout error:", error);
+      //("Logout error:", error);
     }
   };
 

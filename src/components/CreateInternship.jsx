@@ -5,11 +5,14 @@ import { CreateInternship } from "../store/Actions/internshipsAction";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { RiArrowLeftLine } from "@remixicon/react";
+import Dropdown from "./EmployeDropdown";
 
 function createInternship() {
   const dispatch = useDispatch(); // Get dispatch function
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.employe);
+  const [ShowDropdown, setShowDropdown] = useState(false);
+
   const [formData, setFormData] = useState({
     profile: "",
     responsibility: "",
@@ -27,6 +30,13 @@ function createInternship() {
       amount: "", // Initialize amount
     },
   });
+
+  const opendropdown = () => {
+    setShowDropdown(true); // Show Editresume component when edit is clicked
+  };
+  const closedropdown = () => {
+    setShowDropdown(false); // Hide Editresume component when close is clicked
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,7 +77,7 @@ function createInternship() {
       dispatch(asynccurrentemploye());
       navigate("/employe");
     } catch (error) {
-      console.log(error.response.data);
+      //(error.response.data);
     }
   };
 
@@ -91,11 +101,13 @@ function createInternship() {
 
   return (
     <>
+      {ShowDropdown && <Dropdown onClose={closedropdown} />}
+
       <div className=" flex  w-full h-32 border-b-2 overflow-hidden ">
         <div className="w-[70%] h-full">
           <img
             className="w-[15%]   max-[600px]:w-[80%] ml-[20vh] max-[600px]:ml-[0vh] mt-2 "
-            src="../../public/images/logo.webp"
+            src="https://ik.imagekit.io/sunnykurmi/logo.webp?updatedAt=1708749688574"
             alt=""
           />
         </div>
@@ -118,6 +130,7 @@ function createInternship() {
           <img
             className="h-16 w-16 flex-shrink-0 object-cover rounded-full"
             src={user.organizationlogo.url}
+            onClick={opendropdown}
             alt=""
           />
         </div>
@@ -144,6 +157,11 @@ function createInternship() {
                 placeholder="eg.Web developer"
                 id=""
               />
+              {formData.profile && formData.profile.length < 3 && (
+                <p className="text-xl mt-1 text-red-500">
+                  Please enter at least 3 characters
+                </p>
+              )}
             </div>
             <div className="w-full">
               <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
@@ -157,6 +175,12 @@ function createInternship() {
                 placeholder="eg.Managing Database"
                 id=""
               />
+              {formData.responsibility &&
+                formData.responsibility.length < 3 && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter at least 3 characters
+                  </p>
+                )}
             </div>
             <div className="w-full">
               <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
@@ -170,6 +194,11 @@ function createInternship() {
                 placeholder="eg.gym membership"
                 id=""
               />
+              {formData.perks && formData.perks.length < 3 && (
+                <p className="text-xl mt-1 text-red-500">
+                  Please enter at least 3 characters
+                </p>
+              )}
             </div>
             <div className="w-full">
               <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
@@ -183,6 +212,11 @@ function createInternship() {
                 placeholder="eg.Development,Data Analytics"
                 id=""
               />
+              {formData.skills && formData.skills.length < 3 && (
+                <p className="text-xl mt-1 text-red-500">
+                  Please enter at least 3 characters
+                </p>
+              )}
             </div>
             <div className="w-full">
               <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
@@ -196,6 +230,11 @@ function createInternship() {
                 placeholder="eg.paper"
                 id=""
               />
+              {formData.assesments && formData.assesments.length < 3 && (
+                <p className="text-xl mt-1 text-red-500">
+                  Please enter at least 3 characters
+                </p>
+              )}
             </div>
             <div className="w-full flex justify-between">
               <div className="w-[48%] ">
@@ -222,7 +261,20 @@ function createInternship() {
                     name="amount"
                     placeholder="eg.20000"
                     id=""
+                    onKeyPress={(e) => {
+                      // Allow only numbers
+                      const pattern = /[0-9]/;
+                      const isValidInput = pattern.test(e.key);
+                      if (!isValidInput) {
+                        e.preventDefault();
+                      }
+                    }}
                   />
+                  {formData.amount.length === 0 && (
+                    <p className="text-xl mt-1 text-red-500">
+                      Please enter amount details
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="w-[48%]">
@@ -252,8 +304,21 @@ function createInternship() {
                   name="openings"
                   placeholder="eg. 50"
                   onChange={handleChange}
+                  onKeyPress={(e) => {
+                    // Allow only numbers
+                    const pattern = /[0-9]/;
+                    const isValidInput = pattern.test(e.key);
+                    if (!isValidInput) {
+                      e.preventDefault();
+                    }
+                  }}
                   id=""
                 />
+                {formData.openings.length === 0 && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter salary details
+                  </p>
+                )}
               </div>
               <div className="w-[48%]">
                 <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
@@ -267,6 +332,11 @@ function createInternship() {
                   placeholder="eg. 3-6 months"
                   id=""
                 />
+                {formData.duration && formData.duration.length < 3 && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter at least 3 characters
+                  </p>
+                )}
               </div>
             </div>
             <div className="flex justify-between">
@@ -279,9 +349,14 @@ function createInternship() {
                   type="text"
                   onChange={handleChange}
                   name="from"
-                  placeholder="eg.2 Feburary 2024"
+                  placeholder="eg. 2 Feburary 2024"
                   id=""
                 />
+                {formData.from && formData.from.length < 3 && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter starting date
+                  </p>
+                )}
               </div>
               <div className="w-[48%]">
                 <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
@@ -295,12 +370,61 @@ function createInternship() {
                   placeholder="eg. 3 March 2024"
                   id=""
                 />
+                {formData.to && formData.to.length < 3 && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter last date
+                  </p>
+                )}
               </div>
             </div>
 
             <button
               type="submit"
-              className="px-[4vh] mb-10 mt-10 py-[2vh] ml-[35vh] max-[600px]:ml-[8vh] text-2xl font-semibold rounded-2xl text-white bg-[#008BDC] "
+              disabled={
+                !formData.profile ||
+                formData.profile.length < 3 || // Disable if first name length is less than 3
+                !formData.responsibility ||
+                formData.responsibility.length < 3 || // Disable if last name length is less than 3
+                !formData.assesments ||
+                formData.assesments.length < 3 || // Disable if last name length is less than 3
+                !formData.perks ||
+                formData.perks.length < 3 || // Disable if last name length is less than 3
+                !formData.skills ||
+                formData.skills.length < 3 || // Disable if last name length is less than 3
+                !formData.duration ||
+                formData.duration.length < 3 ||
+                !formData.from ||
+                formData.from.length < 3 ||
+                !formData.to ||
+                formData.to.length < 3 ||
+                !formData.amount || // Ensure amount is not empty
+                formData.amount.length === 0 ||
+                !formData.openings || // Ensure openings is not empty
+                formData.openings.length === 0 // Disable if last name length is less than 3
+              }
+              className={`px-[4vh] mt-[5vh] mb-10 py-[2vh] ml-[35vh] max-[600px]:ml-[15vh] text-2xl font-semibold rounded-2xl text-white bg-[#008BDC] ${
+                (!formData.profile ||
+                  formData.profile.length < 3 || // Disable if first name length is less than 3
+                  !formData.responsibility ||
+                  formData.responsibility.length < 3 || // Disable if last name length is less than 3
+                  !formData.assesments ||
+                  formData.assesments.length < 3 || // Disable if last name length is less than 3
+                  !formData.perks ||
+                  formData.perks.length < 3 || // Disable if last name length is less than 3
+                  !formData.skills ||
+                  formData.skills.length < 3 || // Disable if last name length is less than 3
+                  !formData.duration ||
+                  formData.duration.length < 3 ||
+                  !formData.from ||
+                  formData.from.length < 3 ||
+                  !formData.to ||
+                  formData.to.length < 3 ||
+                  !formData.amount || // Ensure amount is not empty
+                  formData.amount.length === 0 ||
+                  !formData.openings || // Ensure openings is not empty
+                  formData.openings.length === 0) && // Disable if last name length is less than 3
+                "cursor-not-allowed" // Add cursor-not-allowed class if button is disabled
+              }`}
             >
               Create Internship
             </button>

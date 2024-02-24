@@ -13,7 +13,7 @@ import {
 export default function addaccomp(props) {
   const dispatch = useDispatch();
   const addeducation = useSelector((state) => state.resume.data);
-  // console.log(addeducation.resume.education);
+  // //(addeducation.resume.education);
   const [formData, setFormData] = useState("");
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function addaccomp(props) {
       props.onClose();
       dispatch(Resume());
     } catch (error) {
-      console.log(error.response.data);
+      //(error.response.data);
     }
   };
 

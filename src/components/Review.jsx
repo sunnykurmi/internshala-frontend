@@ -57,13 +57,13 @@ function Review() {
   let internship; // Declare internship variable outside of the loop
   const newa = [...user.jobs, ...user.internships];
   newa.forEach((element) => {
-    console.log(element);
+    //(element);
     if (element._id === id) {
       internship = element; // Assign the value to the variable declared outside the loop
     }
   });
 
-  console.log(internship); // Now internship is accessible here
+  //(internship); // Now internship is accessible here
 
   return (
     <>
@@ -71,7 +71,7 @@ function Review() {
         <div className="w-[70%] h-full">
           <img
             className="w-[15%]   max-[600px]:w-[80%] ml-[20vh] max-[600px]:ml-[0vh] mt-2 "
-            src="../../public/images/logo.webp"
+            src="https://ik.imagekit.io/sunnykurmi/logo.webp?updatedAt=1708749688574"
             alt=""
           />
         </div>
@@ -154,7 +154,10 @@ function Review() {
             ))}
         </div>
       </div>
-      <img src="../../public/images/footer.png" alt="" />
+      <img
+        src="https://ik.imagekit.io/sunnykurmi/footer.png?updatedAt=1708749737577"
+        alt=""
+      />
     </>
   );
 }

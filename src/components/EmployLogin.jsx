@@ -15,7 +15,7 @@ import { asyncemployesignin } from "../store/Actions/employeActions";
 function Login({ onClose }) {
   const navigate = useNavigate();
   const { isAuth, error } = useSelector((state) => state.employe);
-  console.log(error);
+  //(error);
   const dispatch = useDispatch();
 
   const [employeFormData, setEmployeFormData] = useState({

@@ -27,7 +27,7 @@ export default function Forgot() {
 
   useEffect(() => {
     if (data) {
-      settoken(data.emailemploye.resetPasswordToken)
+      settoken(data.emailemploye.resetPasswordToken);
       setid(data.emailemploye._id);
       seturl(data.url);
     }
@@ -43,20 +43,20 @@ export default function Forgot() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      dispatch(SendMail2(formdata))
+      dispatch(SendMail2(formdata));
     } catch (error) {
-      console.log(error.response.data);
+      //(error.response.data);
     }
   };
-  if(token==="1"){
+  if (token === "1") {
     toast("Email Sent Successfully");
   }
   const handleSubmit2 = async (e) => {
     e.preventDefault();
     try {
-      dispatch(ChangePassword3(formData, id))
+      dispatch(ChangePassword3(formData, id));
     } catch (error) {
-      console.log(error.response.data);
+      //(error.response.data);
     }
   };
 

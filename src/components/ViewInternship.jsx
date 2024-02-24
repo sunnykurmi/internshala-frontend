@@ -2,17 +2,19 @@ import React, { useEffect, useState } from "react";
 import "../../public/stylesheet/internshipdetail.css";
 import { useDispatch, useSelector } from "react-redux";
 import "tailwindcss/tailwind.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { internshipdetail } from "../store/Actions/internshipsAction";
 import {
   applyinternship,
   asynccurrentUser,
 } from "../store/Actions/userActions";
+import { deleteinternship } from "../store/Actions/employeActions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   RiArrowLeftLine,
   RiCalendarLine,
+  RiDeleteBin5Line,
   RiDoorOpenLine,
   RiGroupLine,
   RiMapPinLine,
@@ -25,18 +27,19 @@ export default function InternshipDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const data = useSelector((state) => state.internships.data);
-  const { user } = useSelector((state) => state.employe);
+  // const { user } = useSelector((state) => state.employe);
+  const navigate = useNavigate();
   // const apply = user.appliedinternships;
-  console.log(user);
+  // //(user);
 
-  const handleApply = () => {
-    dispatch(applyinternship(id));
-    toast("Applied");
-  };
   useEffect(() => {
     dispatch(asynccurrentUser()); // Fetch loggedinuser data for student when component mounts
   }, [dispatch]);
 
+  const handledelete = () => {
+    navigate("/employe");
+    dispatch(deleteinternship(id));
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -64,29 +67,26 @@ export default function InternshipDetail() {
 
   return (
     <>
-      {/* <div className="homenav">
-        <div className="homenavleft">
-          <img src="../../public/images/logo.webp" alt="" />
-          <h2>Internships</h2>
-          <h2>Jobs</h2>
-          <h2>Courses</h2>
-        </div>
-        <div className="homenavright">
-          <button className="font-bold text-xl">Search</button>
-          <button className="font-bold text-xl">Login</button>
-          <button className="font-bold text-xl">Candidate Sign-up</button>
-          <button className="font-bold text-xl">Employer Sign-up</button>
-        </div>
-      </div> */}
       <div className="flex text-sky-500 font-semibold gap-5 items-center ml-[10vh] mt-[5vh] text-2xl ">
         <RiArrowLeftLine size={20} />
         <Link to={-1}>Go back</Link>
       </div>
       <div className="interparent">
-        <h1 className="font-semibold">{data.profile} Intern</h1>
+        <div className="flex items-center justify-center gap-5 mb-5">
+          <h1 className=" text-5xl font-semibold">{data.profile} Intern</h1>
+          <RiDeleteBin5Line
+            onClick={handledelete}
+            size={15}
+            className="mt-1 cursor-pointer"
+            color="#1c1c1c9d" // set custom `width` and `height`
+          />
+        </div>
         <div className="interparent2">
           <button className="font-semibold text-xl">
-            <img src="../../public/images/stock.png" alt="" />
+            <img
+              src="https://ik.imagekit.io/sunnykurmi/stock.png?updatedAt=1708749737137"
+              alt=""
+            />
             Actively hiring
           </button>
           <div className="w-full h-24 flex ">
@@ -239,7 +239,10 @@ export default function InternshipDetail() {
           </div>
         </div>
         <div className="mt-24">
-          <img src="../../public/images/footer.png" alt="" />
+          <img
+            src="https://ik.imagekit.io/sunnykurmi/footer.png?updatedAt=1708749737577"
+            alt=""
+          />
         </div>
       </div>
       <ToastContainer />

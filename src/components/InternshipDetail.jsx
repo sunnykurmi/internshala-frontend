@@ -26,12 +26,15 @@ export default function InternshipDetail() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.internships.data);
   const { user } = useSelector((state) => state.user);
-  // const apply = user.appliedinternships;
-  console.log(user);
+  const apply = user ? user.appliedinternships : [];
+  // //(user);
+  //(apply);
 
   const handleApply = () => {
     dispatch(applyinternship(id));
-    toast("Applied");
+    toast.success("applied!", {
+      position: "top-center",
+    });
   };
   useEffect(() => {
     dispatch(asynccurrentUser()); // Fetch loggedinuser data for student when component mounts
@@ -86,7 +89,10 @@ export default function InternshipDetail() {
         <h1 className="font-semibold">{data.profile} Intern</h1>
         <div className="interparent2">
           <button className="font-semibold text-xl">
-            <img src="../../public/images/stock.png" alt="" />
+            <img
+              src="https://ik.imagekit.io/sunnykurmi/stock.png?updatedAt=1708749737137"
+              alt=""
+            />
             Actively hiring
           </button>
           <div className="w-full h-24 flex ">
@@ -238,12 +244,21 @@ export default function InternshipDetail() {
             </div>
           </div>
           <div className=" w-full h-5 flex justify-center align-middle mt-[10vh] ">
-            <button
-              className="w-[18vh] h-[6vh] text-white font-semibold text-2xl rounded-xl bg-[#008bdcf2]"
-              onClick={handleApply}
-            >
-              Apply now
-            </button>
+            {apply.some((item) => item._id === id) ? (
+              <button
+                className="w-[18vh] h-[6vh] text-white font-semibold text-2xl rounded-xl bg-[#008bdcf2]"
+                disabled={true}
+              >
+                Already applied
+              </button>
+            ) : (
+              <button
+                className="w-[18vh] h-[6vh] text-white font-semibold text-2xl rounded-xl bg-[#008bdcf2]"
+                onClick={handleApply}
+              >
+                Apply now
+              </button>
+            )}
           </div>
         </div>
         <div className="mt-24">

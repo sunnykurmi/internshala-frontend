@@ -17,12 +17,11 @@ export default function Internships() {
   // const data = useSelector((state) => state.internships.data);
   const { data, loading, error } = useSelector((state) => state.internships);
 
-  // console.log(data);
+  // //(data);
 
   useEffect(() => {
     dispatch(fetchInternships());
   }, [dispatch]);
-  
 
   if (loading) {
     return (
@@ -81,7 +80,10 @@ export default function Internships() {
             data.map((item, index) => (
               <div key={index} className="inters">
                 <button className="font-semibold   ">
-                  <img src="../../public/images/stock.png" alt="" />
+                  <img
+                    src="https://ik.imagekit.io/sunnykurmi/stock.png?updatedAt=1708749737137"
+                    alt=""
+                  />
                   <h3 className="font-semibold text-xl   ">Actively Hiring</h3>
                 </button>
                 <div className="interninfo">

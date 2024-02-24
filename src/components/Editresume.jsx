@@ -31,7 +31,7 @@ export default function Editresume(props) {
       dispatch(Resume());
       props.onClose();
     } catch (error) {
-      console.log(error.response.data);
+      //(error.response.data);
     }
   };
 
@@ -76,6 +76,11 @@ export default function Editresume(props) {
                   onChange={handleChange}
                   placeholder="john"
                 />{" "}
+                {formData.firstname && formData.firstname.length < 3 && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter at least 3 characters
+                  </p>
+                )}
               </div>
               <div className="w-[50%]  ">
                 <h1 className=" text-2xl font-bold mb-2 text-[#272727c1]">
@@ -90,6 +95,11 @@ export default function Editresume(props) {
                   id=""
                   placeholder="doey"
                 />{" "}
+                {formData.lastname && formData.lastname.length < 3 && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter at least 3 characters
+                  </p>
+                )}
               </div>
             </div>
             <div className="w-full">
@@ -104,6 +114,11 @@ export default function Editresume(props) {
                 value={formData.email}
                 onChange={handleChange}
               />
+              {formData.email && !/^\S+@\S+\.\S+$/.test(formData.email) && (
+                <p className="text-xl mt-1 text-red-500">
+                  Please enter a valid email address
+                </p>
+              )}
             </div>
             <div className="flex w-full">
               <div className="w-[50%]">
@@ -118,7 +133,20 @@ export default function Editresume(props) {
                   value={formData.contact}
                   onChange={handleChange}
                   placeholder="Add contact details"
+                  onKeyPress={(e) => {
+                    // Allow only numbers
+                    const pattern = /[0-9]/;
+                    const isValidInput = pattern.test(e.key);
+                    if (!isValidInput) {
+                      e.preventDefault();
+                    }
+                  }}
                 />
+                {formData.contact && !/^\d{10}$/.test(formData.contact) && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter a valid 10-digit contact number
+                  </p>
+                )}
               </div>
               <div className="w-[50%]">
                 <h1 className=" mt-16 text-2xl font-bold mb-2 text-[#272727c1]">
@@ -133,6 +161,11 @@ export default function Editresume(props) {
                   onChange={handleChange}
                   placeholder="add city details"
                 />
+                {formData.city && formData.city.length < 3 && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please enter at least 3 characters
+                  </p>
+                )}
               </div>
             </div>
             <div className="w-[50%]">
@@ -148,10 +181,41 @@ export default function Editresume(props) {
                 onChange={handleChange}
                 placeholder="male/female"
               />
+              {formData.gender &&
+                !["male", "female"].includes(formData.gender.toLowerCase()) && (
+                  <p className="text-xl mt-1 text-red-500">
+                    Please select either "male" or "female".
+                  </p>
+                )}
             </div>
             <button
               type="submit"
-              className="px-[4vh]  py-[2vh] ml-[40vh] max-[600px]:ml-[60%] text-2xl font-semibold rounded-2xl text-white bg-[#008BDC] "
+              disabled={
+                !formData.contact ||
+                formData.contact.length !== 10 || // Disable if contact number length is not 10
+                !formData.firstname ||
+                formData.firstname.length < 3 || // Disable if first name length is less than 3
+                !formData.lastname ||
+                formData.lastname.length < 3 || // Disable if last name length is less than 3
+                !formData.city ||
+                formData.city.length < 3 || // Disable if city length is less than 3
+                // Disable if organization name length is less than 3
+                !formData.email || // Disable if email is empty
+                !/^\S+@\S+\.\S+$/.test(formData.email) // Disable if email is not valid
+              }
+              className={`px-[4vh] mt-[5vh] py-[2vh] ml-[40vh] max-[600px]:ml-[15vh] text-2xl font-semibold rounded-2xl text-white bg-[#008BDC] ${
+                (!formData.contact ||
+                  formData.contact.length !== 10 ||
+                  !formData.firstname ||
+                  formData.firstname.length < 3 ||
+                  !formData.lastname ||
+                  formData.lastname.length < 3 ||
+                  !formData.city ||
+                  formData.city.length < 3 ||
+                  !formData.email ||
+                  !/^\S+@\S+\.\S+$/.test(formData.email)) &&
+                "cursor-not-allowed" // Add cursor-not-allowed class if button is disabled
+              }`}
             >
               Update
             </button>

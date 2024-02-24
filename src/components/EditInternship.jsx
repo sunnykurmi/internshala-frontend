@@ -13,10 +13,10 @@ export default function Editinternship(props) {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resume.data);
   const index = props.index;
-  //   console.log(index);
-  // console.log(resume.resume.education[index]);
+  //   //(index);
+  // //(resume.resume.education[index]);
   const [formData, setFormData] = useState(resume.resume.internships[index]);
-  // console.log(formData);
+  // //(formData);
   useEffect(() => {
     dispatch(Resume());
   }, [dispatch]);
@@ -33,7 +33,7 @@ export default function Editinternship(props) {
       dispatch(Resume());
       props.onClose();
     } catch (error) {
-      console.log(error.response.data);
+      //(error.response.data);
     }
   };
 

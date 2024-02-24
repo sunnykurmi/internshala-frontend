@@ -1,4 +1,10 @@
-import { saveUser, removeUser, sendmail ,employsigninerror,employsignuperror  } from "../Reducers/employeSlice";
+import {
+  saveUser,
+  removeUser,
+  sendmail,
+  employsigninerror,
+  employsignuperror,
+} from "../Reducers/employeSlice";
 import axios from "../../utils/axios";
 
 export const asynccurrentemploye = () => async (dispatch, getState) => {
@@ -6,7 +12,7 @@ export const asynccurrentemploye = () => async (dispatch, getState) => {
     const { data } = await axios.post("/employe/current");
     dispatch(saveUser(data.loggedinuser));
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 
@@ -33,7 +39,7 @@ export const asyncremoveEmploye = () => async (dispatch, getState) => {
     await axios.get("/employe/signout");
     dispatch(removeUser());
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 
@@ -42,16 +48,32 @@ export const employeupdate = (formData, id) => async (dispatch) => {
     await axios.post(`/employe/employeupdate/${id}`, formData); // Pass formData to the backend
     dispatch(asynccurrentemploye());
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
+  }
+};
+export const deleteinternship = (id) => async (dispatch) => {
+  try {
+    await axios.post(`/employe/delete/internship/${id}`); // Pass formData to the backend
+    dispatch(asynccurrentemploye());
+  } catch (error) {
+    //(error.response.data);
+  }
+};
+export const deletejob = (id) => async (dispatch) => {
+  try {
+    await axios.post(`/employe/delete/job/${id}`); // Pass formData to the backend
+    dispatch(asynccurrentemploye());
+  } catch (error) {
+    //(error.response.data);
   }
 };
 export const employeavatar = (formData, id) => async (dispatch) => {
   try {
-    console.log(formData, id);
+    //(formData, id);
     await axios.post(`/employe/avatar/${id}`, formData);
     dispatch(asynccurrentemploye());
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 export const SendMail2 = (formdata) => async (dispatch) => {
@@ -59,7 +81,7 @@ export const SendMail2 = (formdata) => async (dispatch) => {
     const response = await axios.post("/employe/send-mail/", formdata);
     dispatch(sendmail(response.data));
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 
@@ -67,7 +89,7 @@ export const ChangePassword3 = (formData, id) => async () => {
   try {
     await axios.post(`/employe/reset-password/${id}`, formData); // Pass formData to the backend
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 
@@ -76,7 +98,7 @@ export const ChangePassword4 = (formData, id) => async (dispatch) => {
     await axios.post(`/employe/reset-password/${id}`, formData); // Pass formData to the backend
     dispatch(asynccurrentemploye());
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
 
@@ -85,6 +107,6 @@ export const Delete2 = (userId) => async (dispatch) => {
     await axios.post(`/employe/delete-account/${userId}`);
     dispatch(asynccurrentemploye());
   } catch (error) {
-    console.log(error.response.data);
+    //(error.response.data);
   }
 };
