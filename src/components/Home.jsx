@@ -133,7 +133,7 @@ export default function Home() {
       <div ref={jobsRef}>
         <Jobs />
       </div>
-      <img className="home" src="../../public/images/home.jpg" alt="" />
+      <img className="home" src="https://ik.imagekit.io/sunnykurmi/home.jpg?updatedAt=1708749737993" alt="" />
       <div className="marquee">
         <img
           src="https://internshala.com/static/images/homepage/top_companies.png"
