@@ -11,7 +11,7 @@ export const fetchJobs = () => async (dispatch) => {
 };
 export const alljobdetails = (id) => async (dispatch) => {
   try {
-    const response = await axios.post(`/job/detail/${id}`);
+    const response = await axios.get(`/job/detail/${id}`);
     dispatch(jobdetail(response.data.job));
   } catch (error) {
     //(error);
