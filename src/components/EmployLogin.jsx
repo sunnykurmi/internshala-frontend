@@ -15,6 +15,7 @@ import { asyncemployesignin } from "../store/Actions/employeActions";
 function Login({ onClose }) {
   const navigate = useNavigate();
   const { isAuth, error } = useSelector((state) => state.employe);
+  const [loading, setloading] = useState(false)
   //(error);
   const dispatch = useDispatch();
 
@@ -29,7 +30,9 @@ function Login({ onClose }) {
 
   const signinEmploye = async (event) => {
     event.preventDefault();
-    dispatch(asyncemployesignin(employeFormData));
+    setloading(true);
+     await dispatch(asyncemployesignin(employeFormData));
+    setloading(false);
   };
 
   useEffect(() => {
@@ -92,9 +95,15 @@ function Login({ onClose }) {
                 <h4>
                   <Link to="/employe/forgot">forgot password?</Link>
                 </h4>
-                <button onClick={signinEmploye} id="formbtn">
-                  Login
-                </button>
+                {loading ? (
+                  <button id="formbtn" disabled>
+                    Loading...
+                  </button>
+                ) : (
+                  <button onClick={signinEmploye} id="formbtn">
+                    Login
+                  </button>
+                )}
                 <h5>
                   New to internshala ? Register (
                   <Link to="/student/signup">student</Link>/

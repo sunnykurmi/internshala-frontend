@@ -7,6 +7,7 @@ import "../../public/stylesheet/signup.css";
 
 export default function Signup() {
   const navigate = useNavigate();
+  const [loading, setloading] = useState(false)
   const { isAuth, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [formValid, setFormValid] = useState(false);
@@ -29,7 +30,9 @@ export default function Signup() {
 
   const signupuser = async (event) => {
     event.preventDefault();
-    dispatch(asyncsignup(formData));
+    setloading(true);
+    await dispatch(asyncsignup(formData));
+    setloading(false);
   };
 
   useEffect(() => {
@@ -133,7 +136,7 @@ export default function Signup() {
               <h4></h4>
               <h5>By signing up, you agree to our Terms and Conditions.</h5>
               <button onClick={signupuser} id="formbtn" disabled={!formValid}>
-                Sign Up
+                {loading ? "Loading..." : "Sign Up"}
               </button>
             </form>
             <h4>

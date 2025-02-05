@@ -8,7 +8,7 @@ import EmployeLogin from "../components/EmployLogin";
 
 export default function EmployeSignup() {
   const [formValid, setFormValid] = useState(false);
-
+  const [loading, setloading] = useState(false)
   const navigate = useNavigate();
   const { isAuth, error } = useSelector((state) => state.employe);
   const dispatch = useDispatch();
@@ -31,7 +31,9 @@ export default function EmployeSignup() {
   };
   const signupemploye = async (event) => {
     event.preventDefault();
-    dispatch(asyncemployesignup(formData));
+    setloading(true);
+     await dispatch(asyncemployesignup(formData));
+    setloading(false);
   };
   useEffect(() => {
     if (isAuth) {
@@ -111,7 +113,7 @@ export default function EmployeSignup() {
               name="firstname"
               value={formData.firstname}
               onChange={employehandleChange}
-              placeholder="John"
+              placeholder="Enter your first name"
             />
             {error &&
               error.includes("First name should be 4 character long") && (
@@ -126,7 +128,7 @@ export default function EmployeSignup() {
               name="lastname"
               value={formData.lastname}
               onChange={employehandleChange}
-              placeholder="Doe"
+              placeholder="Enter your last name"
             />
             {error &&
               error.includes("Last name should be 4 character long") && (
@@ -141,7 +143,7 @@ export default function EmployeSignup() {
               name="contact"
               value={formData.contact}
               onChange={employehandleChange}
-              placeholder="Doe"
+              placeholder="Enter your mobile number"
             />
             {error && error.includes("Contact is not valid") && (
               <p className="font-medium text-xl text-red-400">
@@ -150,12 +152,14 @@ export default function EmployeSignup() {
             )}
             <h4></h4>
             <h5>By signing up, you agree to our Terms and Conditions.</h5>
+            
             <button
               disabled={!formValid}
               onClick={signupemploye}
               id="employeformbtn"
             >
-              Post for Free
+              {loading ? "Loading..." : "Post for Free"}
+        
             </button>
           </form>
           <h4>
