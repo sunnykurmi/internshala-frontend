@@ -20,7 +20,8 @@ export default function Internships() {
   // //(data);
 
   useEffect(() => {
-    dispatch(fetchInternships());
+    const c= dispatch(fetchInternships());
+    console.log(c)
   }, [dispatch]);
 
   if (loading) {

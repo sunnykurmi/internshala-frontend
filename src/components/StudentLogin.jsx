@@ -36,6 +36,7 @@ function Login({ onClose }) {
       navigate("/student");
     }
   }, [isAuth, navigate]);
+  
   return (
     <>
       <div className="loginparent">

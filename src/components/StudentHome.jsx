@@ -21,7 +21,9 @@ import "swiper/css/scrollbar";
 import Internships from "./Internships";
 import Jobs from "./Jobs";
 import { RiBookmarkLine } from "@remixicon/react";
+
 const Home = () => {
+  
   const [showLogin, setShowLogin] = useState(false); // State to control the visibility of the login component
   const [ShowDropdown, setShowDropdown] = useState(false);
   const internshipsRef = useRef(null);
