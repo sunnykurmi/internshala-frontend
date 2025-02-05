@@ -6,20 +6,23 @@ import {
   signinerror,
 } from "../Reducers/userSlice";
 import axios from "../../utils/axios";
+import { getBearerToken } from "../../utils/auth";
 
 export const asynccurrentUser = () => async (dispatch, getState) => {
   try {
-    const { data } = await axios.post("/student");
+    const { data } = await axios.post("/student", {}, getBearerToken());
     dispatch(saveUser(data.loggedinuser));
   } catch (error) {
+    console.log(error);
     //(error.response.data);
   }
 };
 
 export const asyncsignup = (user) => async (dispatch, getState) => {
   try {
-    await axios.post("/student/signup", user);
-    dispatch(asynccurrentUser());
+    const { data } =  await axios.post("/student/signup", user);
+    localStorage.setItem("token", data.token);
+    dispatch(asynccurrentUser(data.student));
   } catch (error) {
     dispatch(signuperror(error.response.data.message)); // Pass error to the reducer(error.response.data);
   }
@@ -27,16 +30,18 @@ export const asyncsignup = (user) => async (dispatch, getState) => {
 
 export const asyncsignin = (user) => async (dispatch, getState) => {
   try {
-    await axios.post("/student/signin", user);
-    dispatch(asynccurrentUser());
+    const { data } = await axios.post("/student/signin", user);
+    localStorage.setItem("token", data.token);
+    dispatch(asynccurrentUser(data.student));
   } catch (error) {
+    console.log(error);
     dispatch(signinerror(error.response.data.message)); // Pass error to the reducer(error.response.data);
   }
 };
 
 export const applyjob = (jobId) => async (dispatch) => {
   try {
-    await axios.post(`/student/apply/job/${jobId}`);
+    await axios.post(`/student/apply/job/${jobId}`, {}, getBearerToken());
     dispatch(asynccurrentUser());
   } catch (error) {
     //(error.response.data);
@@ -44,7 +49,7 @@ export const applyjob = (jobId) => async (dispatch) => {
 };
 export const applyinternship = (internshipId) => async (dispatch) => {
   try {
-    await axios.post(`/student/apply/internship/${internshipId}`);
+    await axios.post(`/student/apply/internship/${internshipId}`, {}, getBearerToken());
     dispatch(asynccurrentUser());
   } catch (error) {
     //(error.response.data);
@@ -75,7 +80,7 @@ export const ChangePassword2 = (formData, id) => async () => {
 };
 export const Delete = (userId) => async (dispatch) => {
   try {
-    await axios.post(`/student/delete-account/${userId}`);
+    await axios.post(`/student/delete-account/${userId}`, {}, getBearerToken());
     dispatch(asynccurrentUser());
   } catch (error) {
     //(error.response.data);
@@ -93,7 +98,7 @@ export const SendMail = (formdata) => async (dispatch) => {
 export const Avatar = (formData, id) => async (dispatch) => {
   try {
     //(formData, id);
-    await axios.post(`/student/avatar/${id}`, formData);
+    await axios.post(`/student/avatar/${id}`, formData, getBearerToken());
   } catch (error) {
     //(error.response.data);
   }
@@ -101,7 +106,7 @@ export const Avatar = (formData, id) => async (dispatch) => {
 
 export const asyncremoveUser = () => async (dispatch, getState) => {
   try {
-    await axios.get("/student/signout");
+    await axios.get("/student/signout", {}, getBearerToken());
     dispatch(removeUser());
   } catch (error) {
     //(error.response.data);
